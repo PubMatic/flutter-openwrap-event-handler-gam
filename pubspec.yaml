@@ -1,0 +1,22 @@
+name: flutter_openwrap_event_handler_gam
+description: Dart package for supporting OpenWrap SDK's GAM header bidding.
+version: 1.0.0
+repository: https://github.com/PubMatic/flutter-openwrap-event-handler-gam
+homepage: https://community.pubmatic.com/display/OB/OpenWrap+SDK+Home
+
+environment:
+  sdk: ">=2.12.0 <4.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_mobile_ads: ^3.0.0
+  meta: ^1.7.0
+  flutter_openwrap_sdk:
+    version: ^1.0.0
+
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: <1.24.4
