@@ -12,7 +12,7 @@ dependencies:
   flutter_openwrap_event_handler_gam:
     path: ../
   flutter_openwrap_sdk:
-    version: ^1.0.0
+    version: ^1.0.1
   cupertino_icons: ^1.0.2
   google_mobile_ads: ^3.0.0
   permission_handler: <9.1.0

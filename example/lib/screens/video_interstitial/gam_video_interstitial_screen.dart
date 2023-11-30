@@ -91,7 +91,7 @@ class _GAMInterstitialVideoScreen extends State<GAMInterstitialVideoScreen> {
           },
           child: const Icon(Icons.arrow_back),
         ),
-        title: const Text('GAM Video Interstitial'),
+        title: const Text('GAM Interstitial Video'),
       ),
       body: Container(
         color: Colors.grey[200],

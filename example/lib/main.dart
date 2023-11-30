@@ -11,7 +11,6 @@ void main() {
 const List<String> adType = [
   'Banner',
   'MREC Display',
-  'MREC Video',
   'Interstitial Display',
   'Interstitial Video'
 ];
@@ -101,17 +100,10 @@ class SubRow extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const GAMMRECVideoScreen()),
-            );
-            break;
-          case 3:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
                   builder: (context) => const GAMInterstitialScreen()),
             );
             break;
-          case 4:
+          case 3:
             Navigator.push(
               context,
               MaterialPageRoute(
