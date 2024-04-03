@@ -46,6 +46,7 @@ class _GAMMRECDisplayScreen extends State<GAMMRECDisplayScreen> {
         GAMBannerEventHandler(adUnitId: bannerHBAdUnitId, adSizes: adSizes);
 
     // Initialise banner ad.
+    /// For test IDs refer - https://help.pubmatic.com/openwrap/docs/test-and-debug-your-integration-in-gam#test-profileplacements
     _bannerAd = POBBannerAd.eventHandler(
       pubId: pubId,
       profileId: profileId,

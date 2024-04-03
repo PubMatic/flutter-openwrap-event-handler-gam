@@ -4,7 +4,7 @@ Dart package for supporting OpenWrap SDK's GAM header bidding. Enables publisher
 
 ## 2. Documentation
 
-For detailed documentation on how to use the OpenWrap SDK Flutter plugin, please visit the [official OpenWrap Flutter plugin documentation](https://community.pubmatic.com/pages/viewpage.action?spaceKey=FLUT&title=About+OpenWrap+SDK+Flutter+plugin).
+For detailed documentation on how to use the OpenWrap SDK Flutter plugin, please visit the [official OpenWrap Flutter plugin documentation](https://help.pubmatic.com/openwrap/docs/about-openwrap-sdk-flutter-plugin).
 
 ## 3. Report Improvements/Bugs
 

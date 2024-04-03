@@ -45,6 +45,7 @@ class _GAMInterstitialVideoScreen extends State<GAMInterstitialVideoScreen> {
         GAMInterstitialEventHandler(adUnitId: gamInterstitialAdUnitId);
 
     // Initialise interstitial ad
+    /// For test IDs refer - https://help.pubmatic.com/openwrap/docs/test-and-debug-your-integration-in-gam#test-profileplacements
     _interstitial = POBInterstitial(
       pubId: pubId,
       profileId: videoProfileId,
