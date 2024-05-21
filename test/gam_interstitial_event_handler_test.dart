@@ -106,6 +106,9 @@ class _EventListener implements POBInterstitialEventListener {
 
   @override
   POBEventError get onFailedToShow => throw UnimplementedError();
+
+  @override
+  POBAdServerAdEvent get onAdImpression => throw UnimplementedError();
 }
 
 class _GAMTestAd extends Ad {

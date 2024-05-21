@@ -41,6 +41,10 @@ abstract class GAMBaseEventHandler {
   @protected
   bool isAppEventExpected = false;
 
+  /// Flag to maintain whether to deffer the impression callback
+  @protected
+  bool isOnAdImpressionDeferred = false;
+
   /// Base class for gam event handler implementation.
   @protected
   GAMBaseEventHandler({required this.tag, required this.gamAdUnitId});
@@ -65,7 +69,23 @@ abstract class GAMBaseEventHandler {
       log('Ad Server Won.');
       notifyBidWin = false;
       adEventListener?.onAdServerWin();
+      // Notify impression to banner if already occurred
+      notifyDeferredImpression();
     }
+  }
+
+  @protected
+  void notifyDeferredImpression() {
+    if (isOnAdImpressionDeferred) {
+      notifyOnAdImpression();
+    }
+  }
+
+  @protected
+  void notifyOnAdImpression() {
+    adEventListener?.onAdImpression();
+    // Set impression state to default for next refresh cycle
+    isOnAdImpressionDeferred = false;
   }
 
   void onAppEvent(Ad ad, String name, String bidId) {
@@ -75,6 +95,8 @@ abstract class GAMBaseEventHandler {
       // If onAppEvent is called before onAdLoaded(), it means POB bid wins
       notifyBidWin = true;
       adEventListener?.onOpenWrapPartnerWin(bidId);
+      // Notify impression to banner if already occurred
+      notifyDeferredImpression();
     }
     // Give callback to publisher.
     _appEventListener?.call(name, bidId);

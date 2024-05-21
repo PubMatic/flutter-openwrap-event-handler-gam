@@ -6,8 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_openwrap_sdk/flutter_openwrap_sdk.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'helper/gam_event_handler_constants.dart';
 import 'gam_base_event_handler.dart';
+import 'helper/gam_event_handler_constants.dart';
 import 'helper/gam_event_handler_utils.dart';
 
 /// This class implements the communication between the OpenWrap SDK plugin and
@@ -51,6 +51,8 @@ class GAMBannerEventHandler extends GAMBaseEventHandler
       ({Map<String, String>? openWrapTargeting}) {
         if (_eventListener != null) {
           isAppEventExpected = false;
+          // Set impression state to default for next refresh cycle
+          isOnAdImpressionDeferred = false;
 
           AdManagerAdRequest adRequest =
               configureListener?.call() ?? AdManagerAdRequest();
@@ -68,7 +70,8 @@ class GAMBannerEventHandler extends GAMBaseEventHandler
             adUnitId: gamAdUnitId,
             request: adRequest,
             sizes: _gamAdSizes,
-            listener: _AdManagerBannerAdListenerImpl(eventHandler: this),
+            listener: _AdManagerBannerAdListenerImpl(
+                eventHandler: this, recordImpression: _recordImpression),
           );
 
           log('Custom targeting : ${adRequest.customTargeting.toString()}');
@@ -103,9 +106,11 @@ class GAMBannerEventHandler extends GAMBaseEventHandler
   @override
   POBEventAdServerWidget get getAdServerWidget => () {
         if (_bannerAd != null) {
-          return AdWidget(ad: _bannerAd!);
+          // Assign UniqueKey to all the widgets so that each widget can be
+          // identified uniquely and removed from hierarchy at the time of refresh.
+          return AdWidget(key: UniqueKey(), ad: _bannerAd!);
         }
-        log('$tag: Returning empty Container as _bannerAd has not been initlized.');
+        log('$tag: Returning empty Container as _bannerAd has not been initialized.');
         return Container();
       };
 
@@ -167,15 +172,28 @@ class GAMBannerEventHandler extends GAMBaseEventHandler
       log('OpenWrap Partner Won.');
     }
   }
+
+  void _recordImpression() {
+    // Notify impression if already response received
+    if (notifyBidWin != null) {
+      notifyOnAdImpression();
+    } else {
+      isOnAdImpressionDeferred = true;
+    }
+  }
 }
 
 class _AdManagerBannerAdListenerImpl extends AdManagerBannerAdListener {
   final GAMBannerEventHandler _eventHandler;
   final POBBannerEventListener? _eventListener;
+  final Function _recordImpression;
 
-  _AdManagerBannerAdListenerImpl({required GAMBannerEventHandler eventHandler})
+  _AdManagerBannerAdListenerImpl(
+      {required GAMBannerEventHandler eventHandler,
+      required Function recordImpression})
       : _eventHandler = eventHandler,
-        _eventListener = eventHandler._eventListener;
+        _eventListener = eventHandler._eventListener,
+        _recordImpression = recordImpression;
 
   @override
   AdEventCallback? get onAdClosed => (ad) => _eventListener?.onAdClosed();
@@ -196,7 +214,7 @@ class _AdManagerBannerAdListenerImpl extends AdManagerBannerAdListener {
   @override
   AdEventCallback? get onAdImpression => (ad) {
         log('GAM banner recorded the impression');
-        _eventListener?.onAdServerImpressionRecorded();
+        _recordImpression();
       };
 
   @override

@@ -107,8 +107,7 @@ class _EventListener implements POBBannerEventListener {
   POBAdServerAdEvent get onAdOpened => throw UnimplementedError();
 
   @override
-  POBAdServerAdEvent get onAdServerImpressionRecorded =>
-      throw UnimplementedError();
+  POBAdServerAdEvent get onAdImpression => throw UnimplementedError();
 
   @override
   POBAdServerAdEvent get onAdServerWin => () => testData = true;

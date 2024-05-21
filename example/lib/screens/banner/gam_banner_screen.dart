@@ -120,4 +120,9 @@ class _BannerAdListener implements POBBannerAdListener {
   @override
   POBAdEvent<POBBannerAd>? get onAdClicked =>
       (POBBannerAd ad) => developer.log('$_tag: Ad Clicked');
+
+  /// Callback method Notifies that the banner ad impression occurred.
+  @override
+  POBAdEvent<POBBannerAd>? get onAdImpression =>
+      (POBBannerAd ad) => developer.log('$_tag: Ad Impression');
 }

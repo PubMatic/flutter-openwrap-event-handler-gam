@@ -1,3 +1,6 @@
+## 3.0.0
+* Added support for flutter_openwrap_sdk plugin v2.0.0
+
 ## 2.0.0
 * Added support for GAM flutter plugin v5.0.0.
 * Updated minimum supported flutter version to 3.16.6.

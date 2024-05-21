@@ -208,4 +208,9 @@ class _InterstitialListener implements POBInterstitialListener {
   @override
   POBAdEvent<POBInterstitial>? get onAdClicked =>
       (POBInterstitial ad) => developer.log('$_tag: onAdClicked');
+
+  /// Callback method notifies ad impression
+  @override
+  POBAdEvent<POBInterstitial>? get onAdImpression =>
+      (POBInterstitial ad) => developer.log('$_tag: onAdImpression');
 }

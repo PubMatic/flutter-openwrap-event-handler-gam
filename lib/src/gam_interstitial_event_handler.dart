@@ -151,7 +151,10 @@ class _VideoFullScreenCallbacks
 
   @override
   GenericAdEventCallback<AdManagerInterstitialAd>? get onAdImpression =>
-      (AdManagerInterstitialAd ad) => log('$tag $ad onAdImpression');
+      (AdManagerInterstitialAd ad) {
+        log('GAM interstitial recorded the impression');
+        _eventListener?.onAdImpression();
+      };
 
   @override
   GenericAdEventCallback<AdManagerInterstitialAd>?
